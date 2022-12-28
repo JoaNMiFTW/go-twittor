@@ -11,7 +11,6 @@ import (
 func InsertoRegistro(u models.Usuario) (string, bool, error) {
 
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
-
 	defer cancel()
 
 	db := MongoCN.Database("twittor")
