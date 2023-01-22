@@ -1,6 +1,7 @@
 package routers
 
 import (
+	"encoding/json"
 	"net/http"
 
 	"github.com/JoaNMiFTW/go-twittor/bd"
@@ -8,7 +9,15 @@ import (
 )
 
 func BajaRelacion(w http.ResponseWriter, r *http.Request) {
-	ID := r.URL.Query().Get("id")
+	decoder := json.NewDecoder(r.Body)
+	var id id
+	err := decoder.Decode(&id)
+
+	if err != nil {
+		panic(err)
+	}
+
+	ID := id.ID
 
 	var t models.Relacion
 	t.UsuarioID = IDUsuario

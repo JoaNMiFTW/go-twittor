@@ -1,15 +1,28 @@
 package routers
 
 import (
+	"encoding/json"
 	"net/http"
 
 	"github.com/JoaNMiFTW/go-twittor/bd"
 	"github.com/JoaNMiFTW/go-twittor/models"
 )
 
+type id struct {
+	ID string `json:"id"`
+}
+
 func AltaRelacion(w http.ResponseWriter, r *http.Request) {
 
-	ID := r.URL.Query().Get("id")
+	decoder := json.NewDecoder(r.Body)
+	var id id
+	err := decoder.Decode(&id)
+
+	if err != nil {
+		panic(err)
+	}
+
+	ID := id.ID
 	if len(ID) < 1 {
 		http.Error(w, "El parametro ID es obligatorio", http.StatusBadRequest)
 	}
