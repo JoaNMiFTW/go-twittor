@@ -32,6 +32,10 @@ func ModificoRegistro(u models.Usuario, ID string) (bool, error) {
 		registro["avatar"] = u.Avatar
 	}
 
+	if len(u.Banner) > 0 {
+		registro["banner"] = u.Banner
+	}
+
 	if len(u.Biografia) > 0 {
 		registro["biografia"] = u.Biografia
 	}
@@ -41,7 +45,7 @@ func ModificoRegistro(u models.Usuario, ID string) (bool, error) {
 	}
 
 	if len(u.Sitioweb) > 0 {
-		registro["sitioweb"] = u.Nombre
+		registro["sitioWeb"] = u.Sitioweb
 	}
 
 	updtString := bson.M{
